@@ -1,7 +1,6 @@
 # Use an official Python runtime as a parent image
 FROM python:3.9-slim
 
-RUN whoami
 RUN id -u
 # Set the working directory in the container
 WORKDIR /app
