@@ -1,22 +1,21 @@
-# Use an official Python runtime as a parent image
-FROM python:3.9-slim
-RUN rm -f /etc/gshadow /etc/shadow
+# Use a minimal base image with no UID/GID conflicts
+FROM python:3.9-alpine
 
-# Set the working directory in the container
+# Set working directory
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
+# Copy app source
 COPY . /app
 
-# Install any needed packages specified in requirements.txt
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Make port 5555 available to the world outside this container
+# Expose Flask port
 EXPOSE 5555
 
-# Define environment variable
+# Environment vars
 ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0
 
-# Run app.py when the container launches
+# Start Flask app
 CMD ["flask", "run", "--host=0.0.0.0", "--port=5555"]
