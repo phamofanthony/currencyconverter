@@ -1,5 +1,6 @@
 # Use an official Python runtime as a parent image
 FROM python:3.9-slim
+RUN rm -f /etc/gshadow /etc/shadow
 
 # Set the working directory in the container
 WORKDIR /app
